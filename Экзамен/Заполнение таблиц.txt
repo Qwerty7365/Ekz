@@ -1,0 +1,28 @@
+// Excel-файл сохранить как .csv, открыть его в блокноте->сохранить как и поменять кодировку на UTF-16 BE
+
+// Заполнение таблиц
+BULK INSERT Product -- таблица
+FROM 'Z:\ДЭМ_ЭКЗ\Products_import.csv' -- Поменять на нужный путь
+WITH (
+    FIELDTERMINATOR = ';',     
+    ROWTERMINATOR = '\n',      
+    FIRSTROW = 2,                
+    TABLOCK
+);
+
+// IDENTITY в 0, SQL
+DBCC CHECKIDENT ('Partners_product', RESEED, 0) -- таблица
+
+// Пример создания таблицы
+CREATE TABLE Partners(
+ID_partners INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+Type_partner NVARCHAR(10) NOT NULL,
+Name_partner NVARCHAR(100) NOT NULL,
+Director NVARCHAR(100) NOT NULL,
+Email NVARCHAR(50),
+Phone_number NVARCHAR(13) NOT NULL,
+Partners_address NVARCHAR(250) NOT NULL,
+INN NVARCHAR(15) UNIQUE NOT NULL,
+Raiting SMALLINT NOT NULL
+)
+
