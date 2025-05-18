@@ -11,11 +11,11 @@ TForm1* Form1;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner) : TForm(Owner) {}
 //---------------------------------------------------------------------------
-int SelectedPartnerId = -1; // Для другой формы
+int SelectedPartnerId = -1; // Г„Г«Гї Г¤Г°ГіГЈГ®Г© ГґГ®Г°Г¬Г»
 void TForm1::AddPartnerPanel(int id, String type, String name, String dir,
     String phone, int rating, int discount, int top)
 {
-    // Создаем панель
+    // Г‘Г®Г§Г¤Г ГҐГ¬ ГЇГ Г­ГҐГ«РЅ
 	TPanel* panel = new TPanel(ScrollBox1);
     panel->Parent = ScrollBox1;
     panel->Width = ScrollBox1->Width - 20;
@@ -23,57 +23,57 @@ void TForm1::AddPartnerPanel(int id, String type, String name, String dir,
 	panel->Top = top;
     panel->Left = 10;
     panel->Caption = "";
-    panel->Tag = id; // Сохраняем ID партнера в Tag
+    panel->Tag = id; // Г‘Г®ГµГ°Г Г­ГїГҐГ¬ ID ГЇГ Г°ГІГ­ГҐГ°Г  Гў Tag
     SelectedPartnerId = panel->Tag;
-    // Добавляем тип и имя партнера
+    // Г„Г®ГЎГ ГўГ«ГїГҐГ¬ ГІГЁГЇ ГЁ ГЁГ¬Гї ГЇГ Г°ГІГ­ГҐГ°Г 
     TLabel* labelName = new TLabel(panel);
     labelName->Parent = panel;
     labelName->Caption = type + " | " + name;
     labelName->Left = 10;
     labelName->Top = 10;
     labelName->Font->Size = 12;
-    // Добавляем Директора
+    // Г„Г®ГЎГ ГўГ«ГїГҐГ¬ Г„ГЁГ°ГҐГЄГІГ®Г°Г 
     TLabel* labelDirector = new TLabel(panel);
     labelDirector->Parent = panel;
-    labelDirector->Caption = "Директор: " + dir;
+    labelDirector->Caption = "Г„ГЁГ°ГҐГЄГІГ®Г°: " + dir;
     labelDirector->Left = 10;
     labelDirector->Top = 35;
     labelDirector->Font->Size = 10;
-    // Добавляем контактные данные
+    // Г„Г®ГЎГ ГўГ«ГїГҐГ¬ ГЄГ®Г­ГІГ ГЄГІГ­Г»ГҐ Г¤Г Г­Г­Г»ГҐ
     TLabel* labelPhone = new TLabel(panel);
     labelPhone->Parent = panel;
-    labelPhone->Caption = "Телефон: " + phone;
+    labelPhone->Caption = "Г’ГҐГ«ГҐГґГ®Г­: " + phone;
     labelPhone->Left = 10;
     labelPhone->Top = 58;
     labelPhone->Font->Size = 9;
-    // Добавляем контактные данные
+    // Г„Г®ГЎГ ГўГ«ГїГҐГ¬ ГЄГ®Г­ГІГ ГЄГІГ­Г»ГҐ Г¤Г Г­Г­Г»ГҐ
     TLabel* labelRating = new TLabel(panel);
     labelRating->Parent = panel;
-    labelRating->Caption = "Рейтинг: " + IntToStr(rating);
+    labelRating->Caption = "ГђГҐГ©ГІГЁГ­ГЈ: " + IntToStr(rating);
     labelRating->Left = 10;
     labelRating->Top = 76;
     labelRating->Font->Size = 9;
-    // Добавляем рейтинг
+    // Г„Г®ГЎГ ГўГ«ГїГҐГ¬ Г°ГҐГ©ГІГЁГ­ГЈ
 	TLabel* labelDiscount = new TLabel(panel);
 	labelDiscount->Parent = panel;
-	labelDiscount->Caption = "Скидка: " + IntToStr(discount) + "%";
+	labelDiscount->Caption = "Г‘ГЄГЁГ¤ГЄГ : " + IntToStr(discount) + "%";
 	labelDiscount->Left = panel->Width - 80;
 	labelDiscount->Top = 10;
 	labelDiscount->Font->Size = 9;
 	labelDiscount->Alignment = taRightJustify;
 	labelDiscount->Anchors << akRight;
-	//Добавляем событие OnClick для панели
+	//Г„Г®ГЎГ ГўГ«ГїГҐГ¬ Г±Г®ГЎГ»ГІГЁГҐ OnClick Г¤Г«Гї ГЇГ Г­ГҐГ«ГЁ
     panel->OnClick = PanelClick;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::PanelClick(TObject* Sender)
 {
-    // Получаем панель, на которой произошло событие
+    // ГЏГ®Г«ГіГ·Г ГҐГ¬ ГЇГ Г­ГҐГ«Гј, Г­Г  ГЄГ®ГІГ®Г°Г®Г© ГЇГ°Г®ГЁГ§Г®ГёГ«Г® Г±Г®ГЎГ»ГІГЁГҐ
     TPanel* clickedPanel = static_cast<TPanel*>(Sender);
-    // Извлекаем ID из Tag
+    // Г€Г§ГўГ«ГҐГЄГ ГҐГ¬ ID ГЁГ§ Tag
     SelectedPartnerId = clickedPanel->Tag;
-    // Показываем ID выбранного партнера
-    ShowMessage("Выбран ID партнера: " + IntToStr(SelectedPartnerId));
+    // ГЏГ®ГЄГ Г§Г»ГўГ ГҐГ¬ ID ГўГ»ГЎГ°Г Г­Г­Г®ГЈГ® ГЇГ Г°ГІГ­ГҐГ°Г 
+    ShowMessage("Г‚Г»ГЎГ°Г Г­ ID ГЇГ Г°ГІГ­ГҐГ°Г : " + IntToStr(SelectedPartnerId));
 	Form4->LoadPartnerData(SelectedPartnerId);
 	Form4->SelectedId = SelectedPartnerId;
     Form4->ShowModal();
@@ -82,7 +82,7 @@ void __fastcall TForm1::PanelClick(TObject* Sender)
 void __fastcall TForm1::FormCreate(TObject* Sender)
 
 
-// МОЖНО ЗАБИТЬ
+// ГЊГЋГ†ГЌГЋ Г‡ГЂГЃГ€Г’Гњ
 
 
 {
@@ -92,9 +92,9 @@ void __fastcall TForm1::FormCreate(TObject* Sender)
 				BEGIN
 				ALTER TABLE partners ADD Discount INT DEFAULT 0
 				END)";
-	ADOQuery1->ExecSQL(); // Выполняем команду добавления колонки
+	ADOQuery1->ExecSQL(); // Г‚Г»ГЇГ®Г«Г­ГїГҐГ¬ ГЄГ®Г¬Г Г­Г¤Гі Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї ГЄГ®Г«Г®Г­ГЄГЁ
     } catch (const Exception &e) {
-        ShowMessage("Ошибка при добавлении колонки: " + e.Message);
+        ShowMessage("ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГЁ ГЄГ®Г«Г®Г­ГЄГЁ: " + e.Message);
     }
     ADOQuery1->SQL->Text = R"(
 	  UPDATE Partners
@@ -113,7 +113,7 @@ void __fastcall TForm1::FormCreate(TObject* Sender)
 	)";
 	
 	
-// До сюда
+// Г„Г® Г±ГѕГ¤Г 
 
 
 	ADOQuery1->ExecSQL();
@@ -121,9 +121,9 @@ void __fastcall TForm1::FormCreate(TObject* Sender)
 		"SELECT ID_partner, Type_partner, Name_partner, Director, Phone_number, Rating, Discount FROM Partners";
 
     try {
-        ADOQuery1->Open(); // Выполняем запрос
-        int currentTop = 0; // Начальная позиция для первой панели
-        // Перебираем результаты запроса
+        ADOQuery1->Open(); // Г‚Г»ГЇГ®Г«Г­ГїГҐГ¬ Г§Г ГЇГ°Г®Г±
+        int currentTop = 0; // ГЌГ Г·Г Г«ГјГ­Г Гї ГЇГ®Г§ГЁГ¶ГЁГї Г¤Г«Гї ГЇГҐГ°ГўГ®Г© ГЇГ Г­ГҐГ«ГЁ
+        // ГЏГҐГ°ГҐГЎГЁГ°Г ГҐГ¬ Г°ГҐГ§ГіГ«ГјГІГ ГІГ» Г§Г ГЇГ°Г®Г±Г 
 
         while (!ADOQuery1->Eof) {
             int id = ADOQuery1->FieldByName("ID_partner")->AsInteger;
@@ -134,32 +134,32 @@ void __fastcall TForm1::FormCreate(TObject* Sender)
 			int discount = ADOQuery1->FieldByName("Discount")->AsInteger;
 			int rating = ADOQuery1->FieldByName("Rating")->AsInteger;
             AddPartnerPanel(id, type, name, dir, phone, rating, discount, currentTop);
-            currentTop += 100; // Высота панели
+            currentTop += 100; // Г‚Г»Г±Г®ГІГ  ГЇГ Г­ГҐГ«ГЁ
             ADOQuery1->Next();
         }
 
     } catch (Exception &e) {
-        ShowMessage("Ошибка выполнения запроса: " + e.Message);
+        ShowMessage("ГЋГёГЁГЎГЄГ  ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї Г§Г ГЇГ°Г®Г±Г : " + e.Message);
     }
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button1Click(TObject* Sender)
 {
-    // Создаем экземпляр второй формы
+    // Г‘Г®Г§Г¤Г ГҐГ¬ ГЅГЄГ§ГҐГ¬ГЇГ«ГїГ° ГўГІГ®Г°Г®Г© ГґГ®Г°Г¬Г»
     TForm2* formAdd = new TForm2(this);
 
-    // Показываем вторую форму
+    // ГЏГ®ГЄГ Г§Г»ГўГ ГҐГ¬ ГўГІГ®Г°ГіГѕ ГґГ®Г°Г¬Гі
     formAdd->ShowModal();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button2Click(TObject* Sender)
 {
-    // Создаем экземпляр второй формы
+    // Г‘Г®Г§Г¤Г ГҐГ¬ ГЅГЄГ§ГҐГ¬ГЇГ«ГїГ° ГўГІГ®Г°Г®Г© ГґГ®Г°Г¬Г»
     TForm3* formAdd = new TForm3(this);
 
-    // Показываем вторую форму
+    // ГЏГ®ГЄГ Г§Г»ГўГ ГҐГ¬ ГўГІГ®Г°ГіГѕ ГґГ®Г°Г¬Гі
     formAdd->ShowModal();
 }
 //---------------------------------------------------------------------------
